@@ -77,8 +77,7 @@ csfile = open("out.csv", "wt")
 #pred list has all the prediction values, ex 0.597
 inlist = []
 predlist= []
-for i in inf:
-    inlist.append(i)
+
 #seq is protein sequence
 seq = ""
 link = ""
@@ -314,28 +313,33 @@ def csv():
         csfile.write("\n2,TEST2,histogram,-1,,0.5,,test track histogram,%d,,%s,%s, %s (%s),,,,%d,%s,0.9," % (tcount, i, seq[tcount-1], seq[tcount-1], i, tcount, cgrad(i)))
         tcount+=1
 
-uin = input("Input.txt or jsin.json? [t/j]\n")
-match uin:
-    case "t" |"T":
-        txtin = input("GFF or CSV? [g/c]\n")
-        match txtin:
-            case "G" | "g":
-                ingff()
-                print("Run Successful")
-            case "C" | "c":
-                incsv()
-                print("Run Successful")
-            case _:
-                print("Invalid input, run again")
-    case "j" | "J":
-        injsn()
-        print("Run Successful")
-    case _:
-        print("Invalid input, run again")
-html()
-csv()
+def main():
 
+    uin = input("Input.txt or jsin.json? [t/j]\n")
+    match uin:
+        case "t" |"T":
+            for i in inf:
+                inlist.append(i)
+            txtin = input("GFF or CSV? [g/c]\n")
+            match txtin:
+                case "G" | "g":
+                    ingff()
+                    print("Run Successful")
+                case "C" | "c":
+                    incsv()
+                    print("Run Successful")
+                case _:
+                    print("Invalid input, run again")
+        case "j" | "J":
+            injsn()
+            print("Run Successful")
+        case _:
+            print("Invalid input, run again")
+    html()
+    csv()
 
+if __name__ == '__main__':
+    main()
 
 
 
